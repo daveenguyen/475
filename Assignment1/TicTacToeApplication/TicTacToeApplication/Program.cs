@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +29,22 @@ public class TicTacToe
     public void PrintBoard()
     {
         Console.WriteLine("PRINTING THE BOARD. YAYYYY");
+
+        // TODO: (A million years later) not hard-code this board
+        Console.WriteLine(" ------- ------- ------");
+        Console.WriteLine("|       |       |      |");
+        Console.WriteLine("|       |       |      |");
+        Console.WriteLine("|       |       |      |");
+        Console.WriteLine(" ------- ------- ------");
+        Console.WriteLine("|       |       |      |");
+        Console.WriteLine("|       |       |      |");
+        Console.WriteLine("|       |       |      |");
+        Console.WriteLine(" ------- ------- ------");
+        Console.WriteLine("|       |       |      |");
+        Console.WriteLine("|       |       |      |");
+        Console.WriteLine("|       |       |      |");
+        Console.WriteLine(" ------- ------- ------");
+
     }
 
     public void Play()
