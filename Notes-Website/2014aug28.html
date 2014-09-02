@@ -1,0 +1,391 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="./main.css" type="text/css">
+<title>2014-08-28</title></head><body><h1>
+<a name="user-content-c-sharp-continued" class="anchor" href="#c-sharp-continued" aria-hidden="true"><span class="octicon octicon-link"></span></a>C-Sharp Continued...</h1>
+
+<h3>
+<a name="user-content-august-28-2014" class="anchor" href="#august-28-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>August 28, 2014</h3>
+
+<h3>
+<a name="user-content-using-namespace" class="anchor" href="#using-namespace" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using namespace</h3>
+
+<p>Similar to using inheritance in Java</p>
+
+<ul>
+<li>using directive</li>
+</ul><p>EXAMPLE:
+<code>using System;</code> &lt;== uses a name space of system
+so we can use...</p>
+
+<pre lang='Console.WriteLine("");```'><code>
+instead of
+
+```System.Console.WriteLine("");```
+
+Namespace is very similar to C++`s namespace;
+
+EX:
+
+</code></pre>
+
+<p>namespace N1
+{
+    class c1
+    {
+        class c2
+        {</p>
+
+<pre><code>    } // N1.c1.c2
+} // N1.c1
+
+namespace N2
+{
+    class c2
+    {
+    } // N1.N2.c2
+}
+</code></pre>
+
+<p>}</p>
+
+<pre><code>
+======
+
+###Using an alias
+
+```using Alias = System.console;```
+
+So in our main...
+
+```Alias.WriteLine("____");```
+
+======
+
+###Inheritance
+
+Example of doing inheritance
+
+
+</code></pre>
+
+<p>public class Contact: Person
+{
+    // ...
+}</p>
+
+<pre><code>
+
+Example of overwriting a base class method
+
+</code></pre>
+
+<p>class Person
+{
+    public virtual String Name {get; set;}
+}</p>
+
+<p>public class Contact: Person
+{
+    //...
+    public override String Name // lets us override the original class`s function
+    {
+        //...
+    }
+}</p>
+
+<pre><code>
+
+Another example of overloading
+
+</code></pre>
+
+<p>public class Base
+{
+    int _x;
+    public virtual int myProperty;
+    {
+        get
+        {
+            return _x;
+        }
+    }</p>
+
+<pre><code>public virtual void doSomething()
+{
+    _x = 13;
+}
+</code></pre>
+
+<p>}</p>
+
+<pre><code>
+
+</code></pre>
+
+<p>public class Derived: Base
+{
+    public override int myProperty // Overrrides the property found in class Base
+    {
+        get
+        {
+            return _xy2;
+        }
+    }</p>
+
+<pre><code>public override void doSomething()
+{
+    _x = 14;
+}
+</code></pre>
+
+<p>}</p>
+
+<pre><code>
+
+So in our main...
+
+</code></pre>
+
+<p>Base d = new Derived();
+d.doSomething();
+Console.WriteLine(d.myProperty.toString());</p>
+
+<pre><code>
+**NOTE:** Can't assign a base class to a subclass!
+
+###SUPER
+
+Recall using 'super' in Java? Well we use base in C# instead! We use base to call the base method you override in the subclass.
+
+Example:
+
+
+</code></pre>
+
+<p>public class A
+{
+    public virtual void love()
+    {
+        //...
+    }
+}</p>
+
+<pre><code>
+</code></pre>
+
+<p>public class B: A
+{
+    public override void love()
+    {
+        base.love();
+    }
+}</p>
+
+<pre><code>
+======
+
+###new Keyword
+
+Use ```new``` to override non-virtual methods or properties
+
+</code></pre>
+
+<p>public class Base
+{
+    public virtual void doSomethingVirtual()
+    {
+        Console.WriteLine("Base.doSomethingVirtual");
+    }
+    public void doSomethingNonVirtual()
+    {
+    Console.WriteLine("Base.doSomethingNonVirtual");
+    }
+}</p>
+
+<pre><code>
+Now we`ll create a derived class...
+
+</code></pre>
+
+<p>public class Derived: Base
+{
+    public override void doSomethingVirtual()
+    {
+        Console.WriteLine("Derive.doSomethingVirtual");
+    }</p>
+
+<pre><code>// override method doSomethingVirtual()
+public new void doSomethingNonVirtual()
+{
+    Console.WriteLine("Derived.doSomethingNonVirtual");
+}
+</code></pre>
+
+<p>}</p>
+
+<pre><code>
+In main
+
+</code></pre>
+
+<p>Base baseRef = new Derived();
+baseRef.doSomethingVirtual(); // Displays Derive.displaySomethingVirtual
+baseRef.doSomethingNonVirtual; // Won`t call Base.doSomethingNonVirtual..., the keyword needs a new operator</p>
+
+<p>Derived derivedRef = new Derived();
+derivedRef.doSomethingVirtual(); // Derived doSomethingVirtual
+derivedRef.doSomethingNonVirtual();</p>
+
+<pre><code>
+====
+
+#Sealed Class (cannot be derived from...)
+
+
+</code></pre>
+
+<p>public sealed class A
+{
+    // ...
+}</p>
+
+<p>public class B: A // syntax error
+{
+    // ...
+}</p>
+
+<pre><code>
+
+###sealed methods
+
+This presents a subclass from overriding a base class member that was originally declared as virtual function.
+
+</code></pre>
+
+<p>class A
+{
+    public virtual void test
+    {
+        //...
+    }
+}</p>
+
+<p>class B:A
+{
+    public override sealed void test()
+    {</p>
+
+<pre><code>}
+</code></pre>
+
+<p>}</p>
+
+<p>class C:B
+{
+    public override void test()
+    {
+        //... SYNTAX ERROR
+    }
+}</p>
+
+<pre><code>
+===
+
+#Interface
+
+</code></pre>
+
+<p>public interface IA
+{
+    // ...
+}</p>
+
+<pre><code>
+===
+
+#Upcasting and downcasting
+
+Think of a BankAccount, which has a CheckingAccount, SavingsAccount, and LotteryAccount (lulz)
+
+
+</code></pre>
+
+<p>BankAccount ba1, ba2 = new BankAccount();
+LotteryAccount la1, la2 = new LotteryAccount();</p>
+
+<pre><code>
+</code></pre>
+
+<p>ba1 = la2; // A-OKAY. Upcasting is no problem.
+la1 = ba2; // Downcasting. ILLEGAL. Syntax error at compile time
+la1 = (LotteryAccount) ba2; // ILLEGAL. Syntax error at run-time
+la1 = (LotteryAccount) ba1; // A-OKAY, since ba1 was assigned to be a LotteryAccount type</p>
+
+<pre><code>
+Bottom-line?
+
+Upcasting is A-OKAY! Downcasting? Well, it depends.
+
+===
+
+#Assembly
+
+We are dealing here with .exe and .dll files
+
+===
+
+#Access Modifiers
+
+Where to access...
+
+public -- inside AND outside assembly in reference, basically EVERYWHERE
+protected -- can only be accessed in defined class &amp; subclass. Also in &amp; out of assembly
+private -- can only be accessed inside defined (same) class or struct
+interal -- can be accessed inside same assembly, but not another
+protected internal -- accepted anywhere inside same assembly and to the derived class outside of assembly
+
+** The default class for C# is internal **
+
+From the Microsoft website...
+
+&gt; **public**
+&gt;
+&gt; The type or member can be accessed by any other code in the same assembly or another assembly that references it.
+&gt;
+&gt; **private**
+&gt;
+&gt; The type or member can be accessed only by code in the same class or struct.
+&gt;
+&gt; **protected**
+&gt;
+&gt; The type or member can be accessed only by code in the same class or struct, or in a class that is derived from that class.
+&gt;
+&gt; **internal**
+&gt;
+&gt; The type or member can be accessed by any code in the same assembly, but not from another assembly.
+&gt;
+&gt; **protected internal**
+&gt;
+&gt; The type or member can be accessed by any code in the assembly in which it is declared, or from within a derived class in another assembly. Access from another assembly must take place within a class declaration that derives from the class in which the protected internal element is declared, and it must take place through an instance of the derived class type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</code></pre></body></html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>2014-08-26</title>
+<link rel="stylesheet" href="./main.css" type="text/css">
+</head><body><h1>
+<a name="user-content-introduction-to-c-sharp" class="anchor" href="#introduction-to-c-sharp" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction to C-Sharp</h1>
+
+<h3>
+<a name="user-content-august-26-2014" class="anchor" href="#august-26-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>August 26, 2014</h3>
+
+<ul>
+<li>
+<p>Property accessors</p>
+
+<ul>
+<li>Allows us to get/set private data members</li>
+</ul>
+</li>
+</ul><p>EXAMPLE:</p>
+
+<pre><code>class Employee {
+    private String _fname;
+    private String _lname;
+
+    // Create properties
+    public string FirstName {
+        get {
+            return _fname;
+        }
+        set {
+            _fname = value; // MUST be value
+        }
+    }
+    public string LastName {
+        get {
+            return _lname;
+        }
+        set {
+            _lname = value; // MUST be value
+        }
+    }
+}
+</code></pre>
+
+<p>Then in the main..</p>
+
+<pre><code>Employee e1 = new Employee();
+c1.FirstName = "John";
+Console.WriteLine(c1.FirstName);
+</code></pre>
+
+<h1></h1>
+
+<h1>
+<a name="user-content-more-properties" class="anchor" href="#more-properties" aria-hidden="true"><span class="octicon octicon-link"></span></a>More Properties</h1>
+
+<pre><code>class Employee
+{
+    // ...
+    public string Title {get; set;}
+    public Employee Manager {get; set;}
+    // ...
+}
+</code></pre>
+
+<p>In the Main ...</p>
+
+<pre><code>Employee e1 = new Employee();
+Employee e2 = new Employee();
+e1.Manager = e2;
+Console.WriteLine(e1.Manager.Title);
+</code></pre>
+
+<h1></h1>
+
+<h1>
+<a name="user-content-read-only--write-only-mehods--properties" class="anchor" href="#read-only--write-only-mehods--properties" aria-hidden="true"><span class="octicon octicon-link"></span></a>Read-Only &amp; Write-Only Mehods / Properties</h1>
+
+<pre><code>class Employee
+{
+    private string _id;
+
+    public String ID
+    {
+        get
+        {
+            return _id;
+        }
+        private set
+        {
+            _id = value;
+        }
+    }
+}
+</code></pre>
+
+<p>Now if we want to set an ID...</p>
+
+<pre><code>private void initializeID(int i)
+{
+    _id = i.toString();
+}
+</code></pre>
+
+<p>In the main...</p>
+
+<pre><code>Employee e1 = new Employee();
+e1.ID = "123";
+</code></pre>
+
+<h1></h1>
+
+<h1>
+<a name="user-content-constructors" class="anchor" href="#constructors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Constructors</h1>
+
+<p>Object initializers! Note that overloads are A-OK.</p>
+
+<pre><code>Employee e1 = new Employee("John", "Nguyehn") {Title = "abc", Salary = 30000}; // title and salary are properties
+</code></pre>
+
+<h2>
+<a name="user-content-constructor-chaining" class="anchor" href="#constructor-chaining" aria-hidden="true"><span class="octicon octicon-link"></span></a>Constructor Chaining</h2>
+
+<pre><code>class Employee
+{
+    public Employee(string f, string l)
+    {
+        FirstName = f;
+        LastName = l;
+    }
+
+    public Employee(int i, string f, string l)
+    {
+        ID = i;
+        FirstName = f;
+        LastName = l;
+    }
+
+    // note that ---&gt; : this(f, l) calls the first constructor in this chunk
+    public Employee(int i, string f, string l) : this(f, l)
+    {
+        ID = i;
+    }
+}
+</code></pre>
+
+<h1></h1>
+
+<h1>
+<a name="user-content-const-readonly--static" class="anchor" href="#const-readonly--static" aria-hidden="true"><span class="octicon octicon-link"></span></a>const, readonly &amp; static</h1>
+
+<p><strong>const</strong> must be initialized at declaration. it is similar to static</p>
+
+<p>EXAMPLE:</p>
+
+<pre><code>public class
+{
+    // ...
+    public const int c1 = 5;
+}
+</code></pre>
+
+<p>Then in the main...</p>
+
+<pre><code>Console.WriteLine(Test.c1); // we will get 5
+</code></pre>
+
+<p><strong>read-only</strong> can only be initialized either at declaration or in a constructor</p>
+
+<p>Another example...</p>
+
+<pre><code>public class Test
+{
+    private int x;
+    public readonly int y = 25;
+    public readonly int z;
+    // ...
+}
+</code></pre>
+
+<p>We could essentially deal with the next two...</p>
+
+<pre><code>public Test()
+{
+    z = 4;
+}
+</code></pre>
+
+<p>vs.</p>
+
+<pre><code>public Test(int i, int j, int k)
+{
+    x = i, y = j, z = k;
+}
+</code></pre>
+
+<p>Note the outcomes of the following in main...</p>
+
+<pre><code>Test t1 = new Test(); // z == 4
+Test t2 = new Test(11, 22, 33); // z != 4
+</code></pre>
+
+<h1></h1>
+
+<h1>
+<a name="user-content-static-class-methods" class="anchor" href="#static-class-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Static Class Methods</h1>
+
+<pre><code>public class Employee
+{
+    public static int count {get; set;}
+    public Employee(...)
+    {
+        ++count;
+    }
+}
+</code></pre>
+
+<p>And in our main...</p>
+
+<pre><code>Console.WriteLine(Employee.count);
+</code></pre>
+
+<h1></h1>
+
+<h1>
+<a name="user-content-static-constructors" class="anchor" href="#static-constructors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Static Constructors</h1>
+
+<ul>
+<li>Iniitialize the class (not the class instance)</li>
+<li>Runtime calls the static constructor automatically upon first access to the clas</li>
+<li>Use static constroctor to initialize the static data within the class to a particular value (complex value)</li>
+</ul><pre><code>class Employee
+{
+    static Employee ()
+    {
+        Random r = new Random();
+        nextID = r.generate(101, 999);
+    }
+
+    public static int nextID; // LOL WHAT?
+}
+</code></pre></body></html>
