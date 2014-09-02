@@ -22,6 +22,8 @@ public class TicTacToe
     private const int BOARDSIZE = 3; // size of the board
     private int[,] board; // board representation
 
+    board = [BOARDSIZE, BOARDSIZE];
+
     private int _row;
     private int _column;
 
@@ -50,6 +52,8 @@ public class TicTacToe
     public void Play()
     {
         Console.WriteLine("YAYYYYY, TIME TO PLAYYYY");
+
+        // Console.WriteLine("Player " + + "'s turn");
     }
 
     public int RowPosition
@@ -75,4 +79,22 @@ public class TicTacToe
             _column = value;
         }
     }
+
+    // public int Board
+    // {
+    //     get
+    //     {
+    //         return _board;
+    //     }
+    //     set
+    //     {
+    //         _board = [BOARDSIZE, BOARDSIZE];
+    //     }
+    // }
+}
+
+public class Player
+{
+    private bool _turn;
+    private 
 }
